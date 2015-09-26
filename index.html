@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Anti-delusional patterns</title>
+
+		<meta name="description" content="Anti-delusional patterns">
+		<meta name="author" content="Felipe Fernández">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Anti-delusional patterns</h1>
+					<p>
+						<small>Created by <a href="http://felipefzdz.github.io">Felipe Fernández</a> / <a href="https://twitter.com/felipefzdz">@felipefzdz</a></small>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Defining delusion</h2>
+						<blockquote cite="https://www.google.co.uk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=delusion">
+							&ldquo;An idiosyncratic belief or impression maintained despite being contradicted by reality or rational argument, typically as a symptom of mental disorder.&rdquo;
+						</blockquote>
+					</section>
+					<section>
+						<h2>Maybe too strong term</h2>
+						<blockquote cite="https://www.wikiwand.com/en/Delusion">
+							&ldquo;As a pathology, it is distinct from a belief based on false or incomplete information, confabulation, dogma, illusion, or other effects of perception.&rdquo;
+						</blockquote>
+						<aside class="notes">
+							<ul>
+								<li>We'll use a mix of those.</li>
+								<li>Choosing delusion as the most emphatic of those and as placeholder.</li>
+								<li>Examples in modern culture about the caveats of the delusion</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Agile Rationale</h2>
+						<p>Show hidden areas as soon as possible</p>
+						<br>
+						<img width="400px" data-src="img/bob.jpg"/>
+						<aside class="notes">
+							<ul>
+								<li>Agile Manifesto</li>
+								<li>Individuals and interactions over processes and tools</li>
+								<li>Customer collaboration over contract negotiation</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<h1>About the talk</h1>
+					<ul>
+						<li>Operations</li>
+						<li>Testing</li>
+						<li>Design</li>
+						<li>Q&amp;A / Discussion</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>About Me</h2>
+					<h4>Felipe Fernández</h4>
+					<ul>
+						<li>Software Craftsman</li>
+						<li>Work as Consultant for <a href="http://codurance.com">Codurance</a></li>
+						<li>Currently with <a href="http://crowdmix.me">Crowdmix</a></li>
+						<li><a href="http://codurance.com/blog/author/felipe-fernandez/">Blog</a></li>
+						<li>Twitter: <a href="https://twitter.com/felipefzdz">@felipefzdz</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Operations</h2>
+					<aside class="notes">
+						<ul>
+							<li>Operations from a developer perspective</li>
+							<li>Not really talking about how to keep a system up</li>
+							<li>But how to build the infra that support that system</li>
+							<li>Devops is not only a buzz word</li>
+							<li>But something real if you work in a small company</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>I’ll have a look whenever is needed</h2>
+						<aside class="notes">
+							<ul>
+								<li>Overconfidence or just laziness</li>
+								<li>It's easy just think in happy path scenarios</li>
+								<li>But the cost of addressing that later is higher</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Diagnosis in distributed environments</h2>
+						<ul>
+							<li>When your tests are not enough</li>
+							<li>You need to query the state of your system</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Diagnosis methods</h2>
+						<ul>
+							<li>Debugging</li>
+							<li>Querying datastores</li>
+							<li>Logging</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>Easy to do it in a non-clustered syncronous monolith with a well known single datastore</li>
+								<li>Explain how to do it in monolith</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Distributed diagnosis methods</h2>
+						<ul>
+							<li>Debugging -> LOL</li>
+							<li>Querying datastores -> Fragmentation</li>
+							<li>Logging -> Madness</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>Forget about debuggers, anyway, it was never a good idea in production</li>
+								<li>Don't store stuff in binary.</li>
+								<li>Be sure that you master you clients, you don't want to learn those when the fire is on</li>
+								<li>Centralised logging</li>
+								<li>Correlations Ids</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>I’ll have a look whenever is needed</h2>
+						<p>Please don't, it could be really hard and you want to be prepared</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>I need to remove that duplication NOW</h2>
+						<aside class="notes">
+							<ul>
+								<li>Duplication hurts if you care about your code</li>
+								<li>DRY is a well know design principle</li>
+								<li>But addressing duplication prematurely causes pain</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Generalising deployment pipelines</h2>
+						<ul>
+							<li>DIY deployment pipelines</li>
+							<li>Microservices context</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>If you tailor your own scripts and integrations is likely that duplication will arise soon</li>
+								<li>But if you are in a microservices context you want some kind of flexibility</li>
+								<li>So don't go with convention over configuration until you're stable</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Generalization assumptions</h2>
+						<ul>
+							<li>Versioning</li>
+							<li>Checking</li>
+							<li>Continuous integration</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>You can assume that your version information relies in the same structure of your project</li>
+								<li>But you can decide in the future use different submodules strategies or even build systems</li>
+								<li>Not every deployable unit has a health rest endpoint to check if is up and running</li>
+								<li>Not every deployable unit has the same needs from a CI point of view</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>I need to remove that duplication NOW</h2>
+						<p>Do it when you're stable enough</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>I guess that is ready</h2>
+						<aside class="notes">
+							<ul>
+								<li>Something that passes your test is not ready</li>
+								<li>Our goal is not writing tests, but delivering software</li>
+								<li>So until you see it with your eyes, that is not ready</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Creating real walking skeletons</h2>
+						<ul>
+							<li>That includes provisioning and deploying</li>
+							<li>Smoke test as driver</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>Let's talk about what is a walking skeleton</li>
+								<li>If you only care about the application code you're not really doing it</li>
+								<li>First test should be a real black box test.</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>GOOS Philosophy</h2>
+						<ul>
+							<li>Address your non-functional challenges asap</li>
+							<li>Antidote against technical debt</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>Include non-functional concerns in your definition of done</li>
+								<li>If you start from there you will figure out if your architecture is hard to test</li>
+								<li>If it's hard to test you know what you have to do</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>I guess that is ready</h2>
+						<p>Don't guess, double check</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Testing</h2>
+					<aside class="notes">
+						<ul>
+							<li>Testing has trade-offs so don't be dogmatic</li>
+							<li>Everyone has different opinions so, again, don't be dogmatic</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>The parts are working, so the whole</h2>
+						<img width="600px" data-src="img/escher.jpg"/>
+						<aside class="notes">
+							<ul>
+								<li>A system is not only the sum of its parts</li>
+								<li>Integration is full of caveats</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Distributed testing</h2>
+						<p>Don't give up on unit testing</p>
+						<p>But that's not enough</p>
+						<aside class="notes">
+							<ul>
+								<li>The combinatorial explosion of not using unit tests is simply not feasible</li>
+								<li>There are too many branches in almost any system and the overlapping can kill you</li>
+								<li>But being confident is your unit tests is not enough</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Contract testing</h2>
+						<p>Start designing your APIs with respect</p>
+						<p>The customer is always right</p>
+						<aside class="notes">
+							<ul>
+								<li>You can't enforce compile safety about the dispatch of those messages</li>
+								<li>It's not only the bugs introduced by developers, but the unrealiability of networks</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Smoke testing</h2>
+						<p>We need more than a red test</p>
+						<p>Centralised logging and correlation ids</p>
+						<aside class="notes">
+							<ul>
+								<li>When a smoke test fails in a distributed environment, you don't really know if the test is flaky or production code is broken.</li>
+								<li>Investigating logs is painful or even impossible without correlation ids or centralised logging.</li>
+								<li>You lose the defect localisation of fine grained unit tests so you have to be more clever than before.</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>The parts are working, so the whole</h2>
+						<p>Don't understimate the complexity of distributed systems</p>
+					</section>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Testing is always good</h2>
+					<aside class="notes">
+						<ul>
+							<li>Most of developers that loves programming loves testing</li>
+							<li>But they don't come for free</li>
+							<li>Be aware of the trade-offs of every approach</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Testing trade-offs</h2>
+					<ul>
+						<li>Micro unit tests</li>
+						<li>Slow tests</li>
+						<li>Hard to read/write tests</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Tests that are too coupled to implementations are brittle. If you change the implementation of some behaviour tests fail even the behaviour is the same</li>
+							<li>Slow feedback kills TDD flow and in the end the love for testing of the developers</li>
+							<li>As an example, tests that uses json are painful to read and write</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Trade-offs are just trade offs</h2>
+					<ul>
+						<li>Micro unit tests</li>
+						<li>Slow tests</li>
+						<li>Hard to read/write tests</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Unit tests provides pressure on your design, gives you defect localisation and forces you to do baby steps.</li>
+							<li>Integration tests are inherently slow and still they're useful</li>
+							<li>It could make sense to include json in your back-end acceptance tests if you want to use them as communication tool with your front-end developers</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Testing is always good</h2>
+					<p>As long as you understand the trade-offs</p>
+				</section>
+			</section>
+
+				<section>
+					<h2>Design</h2>
+					<aside class="notes">
+						<ul>
+							<li>Design is the key of mantainable systems</li>
+							<li>It's hard to say if you're over engineering</li>
+							<li>In the end we want to deliver features</li>
+							<li>But easy is not simple</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>Language approximations are ok</h2>
+						<aside class="notes">
+							<ul>
+								<li>We know that writing an email cand be hard if we want to be precise</li>
+								<li>Our code is an email that is going to be read it tons of time in the future</li>
+								<li>Let's move the work then to the single writer not to the miriad of readers</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Non leaking design</h2>
+						<ul>
+							<li>Every concept should has clear boundaries</li>
+							<li>Leaks seems cheap, but are poison</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>Some people feels that's a waste kind of duplicating concepts in different boundaries</li>
+								<li>Use nice languages as Scala to convince them</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Hexagonal Architecture</h2>
+						<p>Split between core and infrastructure</p>
+						<p>Stop thinking in layers</p>
+						<img width="400px" data-src="img/hexagon.jpg"/>
+						<aside class="notes">
+							<ul>
+								<li>Check your imports to see if there is IO libraries into your core</li>
+								<li>Useful not only because you maybe want to change your rest layer in the future, but because your domain is free
+								of library/framework restrictiosn</li>
+								<li>Ports and adapters is much easier to explain to a newbie than MVC or layered architectures</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Bounded Contexts</h2>
+						<p>Core DDD concept</p>
+						<p>Impact mapping or even Event Storming can help you to identify them</p>
+						<aside class="notes">
+							<ul>
+								<li>When you have contexts with tightly coupled concepts the mess starts</li>
+								<li>You don't need to go to nano services, so there is not golden rule, but the judgement of the team</li>
+								<li>Once you split them, be aware of the subtle similarities</li>
+								<li>A UserId in service A, could be a userIdFromServiceA in service B</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Language approximations are ok</h2>
+						<p>Often I think that our profession is closer to literature than maths</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Business needs are stable</h2>
+						<aside class="notes">
+							<ul>
+								<li>The point of Agile is fighting against that naive thought</li>
+								<li>Your design should be flexible too, not only your processes</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>CQRS</h2>
+						<img width="600px" data-src="img/cqrs.jpg"/>
+						<aside class="notes">
+							<ul>
+								<li>Split your command and queries</li>
+								<li>Thay makes your entities focused</li>
+								<li>More over that gives flexibility, as we can add different queries (views) on demand</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>CQRS</h2>
+						<p>Extremely perfomant</p>
+						<p>Adds overhead</p>
+						<aside class="notes">
+							<ul>
+								<li>Don't use it unless your domain is really rich</li>
+								<li>Or your scalability needs are demanding</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Business needs are stable</h2>
+						<p>We need they're not. But we need to prove it with our designs</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Thank you</h2>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
